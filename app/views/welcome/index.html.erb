@@ -1,0 +1,33 @@
+<h1>Check Me Out!</h1>
+
+<ul>
+  <% @things.each do |thing| %>
+    <li>
+      <strong><%= thing.name %></strong>
+      <%= thing.available_quantity %> available
+      <% if thing.check_outs.any? %>
+        (<%= thing.quantity %> total)
+      <% end %>
+      
+      <ul>
+        <% thing.check_outs.each do |check_out| %>
+          <li>
+            <%= check_out.quantity %> - <%= check_out.name %> <%= time_ago_in_words check_out.created_at %> ago
+            <%= form_for check_out, method: :delete do |f| %>
+              <%= f.submit 'Return' %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+      
+      <% if thing.available_quantity > 0 %>
+        <%= form_for CheckOut.new(thing: thing) do |f| %>
+          <%= f.hidden_field :thing_id %>
+          <%= f.text_field :name, placeholder: 'Name' %>
+          <%= f.number_field :quantity, placeholder: 'Quantity' %>
+          <%= f.submit %>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
