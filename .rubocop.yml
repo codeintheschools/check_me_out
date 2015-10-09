@@ -1,0 +1,58 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - 'Gemfile'
+    - 'bin/**/*'
+    - 'db/migrate/**/*'
+    - 'db/schema.rb'
+
+Lint/EndAlignment:
+  AlignWith: variable
+
+Style/AccessModifierIndentation:
+  EnforcedStyle: indent
+
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Style/BracesAroundHashParameters:
+  EnforcedStyle: context_dependent
+
+Style/CaseIndentation:
+  IndentWhenRelativeTo: end
+  IndentOneStep: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/EndOfLine:
+  Enabled: false
+
+Style/IndentHash:
+  EnforcedStyle: consistent
+
+Style/IndentationConsistency:
+  EnforcedStyle: rails
+
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Style/OptionHash:
+  Enabled: true
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%': '{}'
+
+Style/SpaceBeforeBlockBraces:
+  EnforcedStyle: no_space
+
+Style/SpecialGlobalVars:
+  Enabled: false
+
+Style/TrailingBlankLines:
+  EnforcedStyle: final_newline
+
+Style/TrailingComma:
+  EnforcedStyleForMultiline: comma

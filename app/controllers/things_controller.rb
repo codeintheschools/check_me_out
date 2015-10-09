@@ -9,7 +9,7 @@ class ThingsController < ApplicationController
 
   def create
     @thing = Thing.new(thing_params)
-    
+
     if @thing.save
       redirect_to things_path, notice: 'Your thing was created!'
     else
@@ -25,9 +25,9 @@ class ThingsController < ApplicationController
 
   def destroy
   end
-  
+
   private
-  
+
     def thing_params
       params.require(:thing).permit(:name, :quantity)
     end
