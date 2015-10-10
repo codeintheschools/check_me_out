@@ -1,3 +1,5 @@
+<% title 'Home' %>
+
 <h1>Check Me Out!</h1>
 
 <ul>
@@ -8,7 +10,7 @@
       <% if thing.check_outs.any? %>
         (<%= thing.quantity %> total)
       <% end %>
-      
+
       <ul>
         <% thing.check_outs.each do |check_out| %>
           <li>
@@ -19,7 +21,7 @@
           </li>
         <% end %>
       </ul>
-      
+
       <% if thing.available_quantity > 0 %>
         <%= form_for CheckOut.new(thing: thing) do |f| %>
           <%= f.hidden_field :thing_id %>
