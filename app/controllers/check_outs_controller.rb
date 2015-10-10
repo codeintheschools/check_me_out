@@ -1,22 +1,15 @@
 class CheckOutsController < ApplicationController
+  respond_to :html, :json
+  
   def create
-    @check_out = CheckOut.new(check_out_params)
-
-    if @check_out.save
-      redirect_to root_path, notice: 'Your thing was checked out!'
-    else
-      redirect_to root_path, alert: 'Something is wrong!'
-    end
+    @check_out = CheckOut.create(check_out_params)
+    respond_with @check_out, location: root_path
   end
 
   def destroy
     @check_out = CheckOut.find(params[:id])
-
-    if @check_out.destroy
-      redirect_to root_path, notice: 'Your thing was returned!'
-    else
-      redirect_to root_path, alert: 'Something is wrong!'
-    end
+    @check_out.destroy
+    respond_with @check_out, location: root_path
   end
 
   private

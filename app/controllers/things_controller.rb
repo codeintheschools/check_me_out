@@ -1,20 +1,19 @@
 class ThingsController < ApplicationController
+  respond_to :html, :json
+  
   def index
     @things = Thing.all.order(:name)
+    respond_with @thing
   end
 
   def new
     @thing = Thing.new
+    respond_with @thing
   end
 
   def create
-    @thing = Thing.new(thing_params)
-
-    if @thing.save
-      redirect_to things_path, notice: 'Your thing was created!'
-    else
-      render :new
-    end
+    @thing = Thing.create(thing_params)
+    respond_with @thing
   end
 
   def show
