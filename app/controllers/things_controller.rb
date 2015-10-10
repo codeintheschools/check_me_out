@@ -1,4 +1,6 @@
 class ThingsController < ResourceController
+  before_action :load_thing, only: [:show, :update, :destroy]
+
   def index
     @things = Thing.all.order(:name)
     respond_with @thing
@@ -15,16 +17,22 @@ class ThingsController < ResourceController
   end
 
   def show
-    @thing = Thing.find(params[:id])
   end
 
   def update
+    @thing.update_attributes(thing_params)
+    respond_with @thing
   end
 
   def destroy
+    @thing.destroy
+    respond_with @thing
   end
 
   private
+    def load_thing
+      @thing = Thing.find(params[:id])
+    end
 
     def thing_params
       params.require(:thing).permit(:name, :quantity)

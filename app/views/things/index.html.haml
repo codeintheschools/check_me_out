@@ -17,7 +17,7 @@
       - @things.each do |thing|
         %tr
           %td
-            %button.btn.btn-danger
+            = button_to thing, method: :delete, class: 'btn btn-danger' do
               %span.glyphicon.glyphicon-trash
           %td= link_to thing.name, thing_path(thing)
           %td.text-right= thing.quantity
