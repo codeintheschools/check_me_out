@@ -44,6 +44,13 @@
       .container
         %h1= yield(:title)
 
+    .container
+      - flash.each do |type, message|
+        - alert_class = case type when 'alert' then 'alert-danger'; when 'notice' then 'alert-info'; end
+        .alert{ class: alert_class, role: 'alert' }
+          %button.close{ type: 'button', data: { dismiss: 'alert' } } &times;
+          = message
+
     = yield
 
     = render partial: 'shared/fork'
