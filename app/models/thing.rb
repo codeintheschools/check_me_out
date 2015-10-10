@@ -1,5 +1,5 @@
 class Thing < ActiveRecord::Base
-  has_many :check_outs
+  has_many :check_outs, dependent: :destroy
 
   validates :quantity, numericality: { greater_than_or_equal_to: 0 }
   validates :name, presence: true
