@@ -1,6 +1,7 @@
 - thing ||= @thing
 
-= form_for thing do |f|
-  = f.text_field :name, placeholder: 'Name'
-  = f.number_field :quantity, placeholder: 'Quantity'
+= bootstrap_form_for thing do |f|
+  = f.alert_message 'Please fix the issues below.'
+  = f.text_field :name, placeholder: 'Name', required: true
+  = f.number_field :quantity, placeholder: 'Quantity', required: true
   = f.submit
