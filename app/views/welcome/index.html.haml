@@ -1,23 +1,67 @@
 - title 'Home'
-%ul
-  - @things.each do |thing|
-    %li
-      %strong= thing.name
-      = thing.available_quantity
-      available
-      - if thing.check_outs.any?
-        (#{thing.quantity} total)
-      %ul
-        - thing.check_outs.each do |check_out|
-          %li
-            = check_out.quantity
-            \- #{check_out.name} #{time_ago_in_words check_out.created_at} ago
-            = form_for check_out, method: :delete do |f|
-              = f.submit 'Return'
-      - if thing.available_quantity > 0
-        = form_for CheckOut.new(thing: thing) do |f|
-          = f.hidden_field :thing_id
-          = f.text_field :name, placeholder: 'Name'
-          = f.number_field :quantity, placeholder: 'Quantity'
-          = f.submit
-= link_to 'Things', things_path
+
+.container-fluid
+
+  .all-things-container
+    - @things.each do |thing|
+      .thing-container
+        .panel.panel-default
+          .panel-heading
+            .pull-right
+              - if thing.available?
+                .label.label-success Available
+              - else
+                .label.label-danger Checked Out
+
+            = thing.name
+
+          - if thing.quantity > 1
+            .panel-body
+              Available
+              %strong= thing.available_quantity
+              (
+              Total
+              = thing.quantity
+              )
+
+          - if thing.check_outs.any?
+            %table.table.table-condensed.table-striped
+              %thead
+                %tr.info
+                  %th{ colspan: 4 } Check Outs
+              %tbody
+                - thing.check_outs.each do |check_out|
+                  %tr
+                    %td= check_out.quantity
+                    %td= check_out.name
+                    %td
+                      = time_ago_in_words check_out.created_at
+                      ago
+                    %td
+                      = form_for check_out, method: :delete do |f|
+                        = f.submit 'Return', class: 'btn btn-sm btn-default'
+
+          - if thing.available_quantity > 0
+            .panel-body
+              = form_for CheckOut.new(thing: thing) do |f|
+                = f.hidden_field :thing_id
+                = f.text_field :name, placeholder: 'Name', class: 'form-control'
+                = f.number_field :quantity, placeholder: 'Quantity', class: 'form-control'
+                = f.submit 'Check Out', class: 'btn btn-default'
+
+  = link_to 'Things', things_path
+
+- content_for :stylesheets do
+  :scss
+    .all-things-container {
+      -moz-column-width: 18em;
+      -webkit-column-width: 18em;
+      -moz-column-gap: 1em;
+      -webkit-column-gap:1em;
+    }
+
+    .thing-container {
+      display: inline-block;
+      padding: .25rem;
+      width: 100%;
+    }
