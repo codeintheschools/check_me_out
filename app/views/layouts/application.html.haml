@@ -53,6 +53,14 @@
 
     = yield
 
+    %footer
+      %hr
+      .container
+        .text-muted
+          %ul.list-inline
+            %li= link_to 'Bugs / Suggestions', 'https://github.com/codeintheschools/check_me_out/issues'
+
+
     = render partial: 'shared/fork'
 
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
