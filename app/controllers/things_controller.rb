@@ -1,5 +1,5 @@
 class ThingsController < ResourceController
-  before_action :load_thing, only: [:show, :update, :destroy]
+  before_action :load_thing, only: [:show, :edit, :update, :destroy]
 
   def index
     @things = Thing.all.order(:name)
@@ -17,6 +17,9 @@ class ThingsController < ResourceController
   end
 
   def show
+  end
+
+  def edit
   end
 
   def update
