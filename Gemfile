@@ -54,6 +54,7 @@ group :development, :test do
   gem 'bullet'
 
   gem 'rspec-rails', '~> 3.0'
+  gem 'capybara'
 end
 
 group :staging, :production do
