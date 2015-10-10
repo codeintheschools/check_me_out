@@ -2,7 +2,7 @@ class Thing < ActiveRecord::Base
   has_many :check_outs, dependent: :destroy
 
   validates :quantity, numericality: { greater_than_or_equal_to: 0 }
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
   def available?
     available_quantity > 0
