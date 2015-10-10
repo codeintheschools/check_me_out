@@ -1,0 +1,16 @@
+- title 'Things'
+%h1 Things
+= link_to 'New Thing', new_thing_path
+%table
+  %thead
+    %tr
+      %th Name
+      %th Quantity
+      %th
+  %tbody
+    - @things.each do |thing|
+      %tr
+        %td= link_to thing.name, thing_path(thing)
+        %td= thing.quantity
+        %td
+          %button Delete
