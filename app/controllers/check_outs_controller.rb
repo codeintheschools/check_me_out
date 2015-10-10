@@ -1,6 +1,4 @@
-class CheckOutsController < ApplicationController
-  respond_to :html, :json
-  
+class CheckOutsController < ResourceController
   def create
     @check_out = CheckOut.create(check_out_params)
     respond_with @check_out, location: root_path

@@ -1,6 +1,4 @@
-class ThingsController < ApplicationController
-  respond_to :html, :json
-  
+class ThingsController < ResourceController
   def index
     @things = Thing.all.order(:name)
     respond_with @thing
