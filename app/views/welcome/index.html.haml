@@ -1,10 +1,9 @@
 - title 'Home'
 
 .container-fluid
-
-  .all-things-container
-    - @things.each do |thing|
-      .thing-container
+  .row
+    - @things.each_with_index do |thing, i|
+      .col-lg-3.col-md-4.col-sm-6
         .panel.panel-default
           .panel-heading
             .pull-right
@@ -56,21 +55,12 @@
                 %button.btn.btn-default{ type: 'submit' }
                   %span.glyphicon.glyphicon-share
                   Check Out
+      - if i % 4 == 3
+        .clearfix.visible-lg-block
+      - if i % 3 == 2
+        .clearfix.visible-md-block
+      - if i % 2 == 1
+        .clearfix.visible-sm-block
 
 - content_for :body_title do
   / Nothing here!
-
-- content_for :stylesheets do
-  :scss
-    .all-things-container {
-      -moz-column-width: 18em;
-      -webkit-column-width: 18em;
-      -moz-column-gap: 1em;
-      -webkit-column-gap:1em;
-    }
-
-    .thing-container {
-      display: inline-block;
-      padding: .25rem;
-      width: 100%;
-    }
