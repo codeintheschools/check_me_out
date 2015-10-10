@@ -29,6 +29,8 @@
 
     = yield
 
+    = render partial: 'shared/fork'
+
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
 
     - if content_for?(:javascripts)
