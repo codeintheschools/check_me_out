@@ -3,6 +3,10 @@ class Thing < ActiveRecord::Base
 
   validates :quantity, numericality: { greater_than: 0 }
 
+  def available?
+    available_quantity > 0
+  end
+
   def available_quantity
     quantity - check_out_quantity
   end
