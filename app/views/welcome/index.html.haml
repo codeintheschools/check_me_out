@@ -28,7 +28,9 @@
             %table.table.table-condensed.table-striped
               %thead
                 %tr.info
-                  %th{ colspan: 4 } Check Outs
+                  %th{ colspan: 4 }
+                    = thing.check_out_quantity
+                    Checked Out
               %tbody
                 - thing.check_outs.each do |check_out|
                   %tr
@@ -43,10 +45,14 @@
 
           - if thing.available_quantity > 0
             .panel-body
-              = form_for CheckOut.new(thing: thing) do |f|
+              = form_for CheckOut.new(thing: thing, quantity: 1) do |f|
                 = f.hidden_field :thing_id
                 = f.text_field :name, placeholder: 'Name', class: 'form-control'
-                = f.number_field :quantity, placeholder: 'Quantity', class: 'form-control'
+                - if thing.quantity > 1
+                  = f.number_field :quantity, placeholder: 'Quantity', class: 'form-control', max: thing.available_quantity, min: 1, step: 1
+                - else
+                  = f.hidden_field :quantity
+
                 = f.submit 'Check Out', class: 'btn btn-default'
 
 - content_for :body_title do
