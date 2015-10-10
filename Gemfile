@@ -57,6 +57,11 @@ group :development, :test do
   gem 'capybara'
 end
 
+group :test do
+  gem 'simplecov', require: nil
+  gem 'codeclimate-test-reporter', require: nil
+end
+
 group :staging, :production do
   gem 'puma'
   gem 'rails_12factor'
