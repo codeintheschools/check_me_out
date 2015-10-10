@@ -49,7 +49,8 @@
                 = f.number_field :quantity, placeholder: 'Quantity', class: 'form-control'
                 = f.submit 'Check Out', class: 'btn btn-default'
 
-  = link_to 'Things', things_path
+- content_for :body_title do
+  / Nothing here!
 
 - content_for :stylesheets do
   :scss
