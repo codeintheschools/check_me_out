@@ -39,9 +39,9 @@
                     %td
                       = time_ago_in_words check_out.created_at
                       ago
-                    %td
-                      = form_for check_out, method: :delete do |f|
-                        = f.submit 'Return', class: 'btn btn-sm btn-default'
+                    %td.text-right
+                      = button_to check_out, method: :delete, class: 'btn btn-xs btn-default', title: 'Return' do
+                        %span.glyphicon.glyphicon-check
 
           - if thing.available_quantity > 0
             .panel-body
@@ -53,7 +53,9 @@
                 - else
                   = f.hidden_field :quantity
 
-                = f.submit 'Check Out', class: 'btn btn-default'
+                %button.btn.btn-default{ type: 'submit' }
+                  %span.glyphicon.glyphicon-share
+                  Check Out
 
 - content_for :body_title do
   / Nothing here!
