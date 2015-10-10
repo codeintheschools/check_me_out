@@ -13,6 +13,6 @@ class Thing < ActiveRecord::Base
   end
 
   def check_out_quantity
-    check_outs.pluck(:quantity).sum
+    check_outs.pending.pluck(:quantity).sum
   end
 end

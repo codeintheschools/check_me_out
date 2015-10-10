@@ -1,4 +1,33 @@
 - title @thing.name
 
 .container
-  = render partial: 'form'
+  = link_to 'Edit Thing', edit_thing_path(@thing), class: 'btn btn-default'
+
+  Quantity:
+  %strong= @thing.quantity
+  Available:
+  %strong= @thing.available_quantity
+  Checked Out:
+  %strong= @thing.check_out_quantity
+
+  %table.table
+    %thead
+      %tr
+        %th Checked Out
+        %th Returned
+        %th Quantity
+        %th Name
+    %tbody
+      - @check_outs.each do |check_out|
+        %tr{ class: check_out.pending? ? 'warning' : 'success' }
+          %td
+            = time_ago_in_words check_out.created_at
+            ago
+          %td
+            - if check_out.completed_at
+              = time_ago_in_words check_out.completed_at
+              ago
+            - else
+              Pending
+          %td= check_out.quantity
+          %td= check_out.name

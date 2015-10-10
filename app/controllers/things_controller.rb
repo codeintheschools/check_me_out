@@ -17,6 +17,8 @@ class ThingsController < ResourceController
   end
 
   def show
+    @check_outs = @thing.check_outs
+    @check_outs = @check_outs.order('completed_at is null desc, completed_at desc, created_at desc')
   end
 
   def edit
@@ -33,6 +35,7 @@ class ThingsController < ResourceController
   end
 
   private
+
     def load_thing
       @thing = Thing.find(params[:id])
     end

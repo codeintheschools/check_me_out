@@ -4,9 +4,9 @@ class CheckOutsController < ResourceController
     respond_with @check_out, location: root_path
   end
 
-  def destroy
+  def complete
     @check_out = CheckOut.find(params[:id])
-    @check_out.destroy
+    @check_out.complete
     respond_with @check_out, location: root_path
   end
 

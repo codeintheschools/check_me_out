@@ -12,7 +12,7 @@
               - else
                 .label.label-danger Checked Out
 
-            = thing.name
+            = link_to thing.name, thing_path(thing)
 
           - if thing.quantity > 1
             .panel-body
@@ -23,7 +23,8 @@
               = thing.quantity
               )
 
-          - if thing.check_outs.any?
+          - pending_check_outs = thing.check_outs.pending
+          - if pending_check_outs.any?
             %table.table.table-condensed.table-striped
               %thead
                 %tr.info
@@ -31,7 +32,7 @@
                     = thing.check_out_quantity
                     Checked Out
               %tbody
-                - thing.check_outs.each do |check_out|
+                - pending_check_outs.each do |check_out|
                   %tr
                     %td= check_out.quantity
                     %td= check_out.name
@@ -39,7 +40,7 @@
                       = time_ago_in_words check_out.created_at
                       ago
                     %td.text-right
-                      = button_to check_out, method: :delete, class: 'btn btn-xs btn-default', title: 'Return' do
+                      = button_to complete_check_out_path(check_out), method: :post, class: 'btn btn-xs btn-default', title: 'Return Things' do
                         %span.glyphicon.glyphicon-check
 
           - if thing.available_quantity > 0
