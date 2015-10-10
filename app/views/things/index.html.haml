@@ -1,15 +1,23 @@
 - title 'Things'
-= link_to 'New Thing', new_thing_path
-%table
-  %thead
-    %tr
-      %th Name
-      %th Quantity
-      %th
-  %tbody
-    - @things.each do |thing|
+
+.container
+
+  %table.table.table-striped
+    %thead
       %tr
-        %td= link_to thing.name, thing_path(thing)
-        %td= thing.quantity
-        %td
-          %button Delete
+        %th
+          = link_to new_thing_path, class: 'btn btn-default' do
+            %span.glyphicon.glyphicon-asterisk
+            New Thing
+
+        %th Name
+        %th.text-right Quantity
+
+    %tbody
+      - @things.each do |thing|
+        %tr
+          %td
+            %button.btn.btn-danger
+              %span.glyphicon.glyphicon-trash
+          %td= link_to thing.name, thing_path(thing)
+          %td.text-right= thing.quantity
