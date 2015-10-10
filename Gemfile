@@ -52,6 +52,8 @@ group :development, :test do
   gem 'rubocop'
 
   gem 'bullet'
+
+  gem 'rspec-rails', '~> 3.0'
 end
 
 group :staging, :production do
