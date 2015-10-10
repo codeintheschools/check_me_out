@@ -15,6 +15,7 @@ class ThingsController < ResourceController
   end
 
   def show
+    @thing = Thing.find(params[:id])
   end
 
   def update
