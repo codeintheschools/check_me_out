@@ -2,7 +2,7 @@ class CheckOut < ActiveRecord::Base
   belongs_to :thing
 
   validates :quantity, numericality: { greater_than: 0 }
-  validate :thing_has_available_quantity
+  validate :thing_has_available_quantity, on: :create
 
   after_create :notify_create
 
@@ -20,6 +20,7 @@ class CheckOut < ActiveRecord::Base
   end
 
   private
+
     def notify_create
       CheckOutNotificationJob.perform_later(self)
     end
