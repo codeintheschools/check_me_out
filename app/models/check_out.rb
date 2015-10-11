@@ -4,6 +4,8 @@ class CheckOut < ActiveRecord::Base
   validates :quantity, numericality: { greater_than: 0 }
   validate :thing_has_available_quantity
 
+  after_create :notify_create
+
   def pending?
     completed_at.nil?
   end
@@ -14,9 +16,17 @@ class CheckOut < ActiveRecord::Base
 
   def complete
     update_attributes(completed_at: send(:current_time_from_proper_timezone))
+    notify_complete
   end
 
   private
+    def notify_create
+      CheckOutNotificationJob.perform_later(self)
+    end
+
+    def notify_complete
+      CheckOutNotificationJob.perform_later(self)
+    end
 
     def thing_has_available_quantity
       errors.add :quantity, 'not available' if thing.available_quantity < quantity
