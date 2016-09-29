@@ -11,3 +11,4 @@ An equipment reservation system.
 - Any [issues with the contribute! label](https://github.com/codeintheschools/check_me_out/labels/contribute%21)
 - More test coverage
 - Any other features you think would be useful (probably best to talk to someone first or open an issue beforehand)
+psdfsdljkf
